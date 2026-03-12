@@ -1,0 +1,8 @@
+fastapi
+sqlmodel
+python-dotenv
+python-decouple
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt
+uvicorn
