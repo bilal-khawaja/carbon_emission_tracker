@@ -122,7 +122,7 @@ const DataEntryPage = () => {
                     </div>
                 </div>
                 <div className="bg-white rounded-lg shadow p-6">
-                    <div className="flex items-center justify-between mb-6">
+                    {/* <div className="flex items-center justify-between mb-6">
 
                         <div className="flex items-center space-x-2 text-gray-500">
                             <Filter size={20} />
@@ -134,7 +134,7 @@ const DataEntryPage = () => {
                                 max={new Date().toISOString().split('T')[0]}
                             />
                         </div>
-                    </div>
+                    </div> */}
 
                     {successMessage && (
                         <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700">
