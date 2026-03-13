@@ -8,12 +8,12 @@ import {
     Info,
     LogOut,
     LogIn,
-    Leaf,
     Menu,
     X
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useState } from 'react';
+import logoImage from '../assets/images.jpg';
 
 const Layout = ({ children }) => {
     const { logout, user, isAuthenticated } = useAuth();
@@ -101,10 +101,8 @@ const Layout = ({ children }) => {
                 <div className="relative flex w-full max-w-xs flex-col bg-white shadow-xl">
                     <div className="flex h-16 flex-shrink-0 items-center justify-between px-4">
                         <div className="flex items-center space-x-3">
-                            <div className="h-8 w-8 bg-primary-600 rounded-full flex items-center justify-center">
-                                <Leaf className="h-5 w-5 text-white" />
-                            </div>
-                            <span className="text-lg font-semibold text-gray-900">Carbon Tracker</span>
+                            <img src={logoImage} alt="SUPERIOR UNIVERSITY" className="h-12 w-12 rounded-full object-cover" />
+                            <span className="text-lg font-semibold text-gray-900" style={{ fontFamily: 'Times New Roman, serif' }}>SUPERIOR UNIVERSITY</span>
                         </div>
                         <button
                             type="button"
@@ -151,10 +149,8 @@ const Layout = ({ children }) => {
             <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 lg:flex-col">
                 <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
                     <div className="flex h-16 shrink-0 items-center space-x-3">
-                        <div className="h-8 w-8 bg-blue-600 rounded-full flex items-center justify-center">
-                            <Leaf className="h-5 w-5 text-white" />
-                        </div>
-                        <span className="text-lg font-semibold text-gray-900">Carbon Tracker</span>
+                        <img src={logoImage} alt="SUPERIOR UNIVERSITY" className="h-12 w-12 rounded-full object-cover" />
+                        <span className="text-lg font-semibold text-gray-900" style={{ fontFamily: 'Times New Roman, serif' }}>SUPERIOR UNIVERSITY</span>
                     </div>
                     <nav className="flex flex-1 flex-col">
                         <ul className="flex flex-1 flex-col gap-y-7">
@@ -206,10 +202,8 @@ const Layout = ({ children }) => {
                     </button>
 
                     <div className="flex flex-1 items-center space-x-3">
-                        <div className="h-6 w-6 bg-blue-600 rounded-full flex items-center justify-center">
-                            <Leaf className="h-3 w-3 text-white" />
-                        </div>
-                        <span className="text-lg font-semibold text-gray-900">Carbon Tracker</span>
+                        <img src={logoImage} alt="SUPERIOR UNIVERSITY" className="h-12 w-12 rounded-full object-cover" />
+                        <span className="text-lg font-semibold text-gray-900" style={{ fontFamily: 'Times New Roman, serif' }}>SUPERIOR UNIVERSITY</span>
                     </div>
 
                     {!isAuthenticated && (

@@ -226,7 +226,7 @@ const DashboardPage = () => {
                         <div>
                             <h1 className="text-4xl font-bold text-white flex items-center space-x-3">
                                 <Leaf className="h-10 w-10 text-green-400" />
-                                <span>Carbon Footprint Dashboard</span>
+                                <span><span style={{ fontFamily: 'Times New Roman, serif', fontWeight: 500 }}>SUPERIOR</span> Carbon Footprint Tracker</span>
                             </h1>
                             <p className="text-green-100 mt-2 ml-14">Track and monitor university carbon emissions</p>
                         </div>
