@@ -10,7 +10,7 @@ import {
     Save
 } from 'lucide-react';
 import { dataAPI, settingsAPI } from '../services/api';
-
+import bgImage from '../assets/2e4f9049-0dc4-4feb-8d6e-771a9b778a9b.jpeg';
 const SettingsPage = () => {
     const { user } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
@@ -66,12 +66,12 @@ const SettingsPage = () => {
                 }]
             };
 
-            console.log('Asset payload:', assetData); // Debug log
+            console.log('Asset payload:', assetData);
             const result = await settingsAPI.updateUniversityResources(assetData);
-            console.log('Save result:', result); // Debug log
+            console.log('Save result:', result);
 
             const updatedAssets = await dataAPI.getUniversityAssets();
-            console.log('Updated assets from API:', updatedAssets); // Debug log
+            console.log('Updated assets from API:', updatedAssets);
             setUniversityAssets(updatedAssets);
 
             setEditingAsset(null);
@@ -81,7 +81,7 @@ const SettingsPage = () => {
             setSuccessMessage('Asset saved successfully!');
         } catch (error) {
             console.error('Error saving asset:', error);
-            console.error('Error details:', error.response?.data); // More detailed error
+            console.error('Error details:', error.response?.data);
             setSuccessMessage(`Failed to save asset: ${error.response?.data?.detail || error.message}`);
         } finally {
             setIsLoading(false);
@@ -117,15 +117,47 @@ const SettingsPage = () => {
         setSelectedAssetType('');
         reset();
     };
+    const headerStyle = {
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: '50% 68%',
+        backgroundAttachment: 'fixed',
+        position: 'relative',
+        margin: '-2rem -2rem 2rem -2rem',
+        padding: '5rem 3rem 3rem 2rem',
+        height: '160px',        
+        borderRadius: '0',
+        overflow: 'hidden',
+    };
+
+    const headerOverlay = {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        zIndex: 0,
+    };
+
+    const headerContent = {
+        position: 'relative',
+        zIndex: 1,
+    };
 
     return (
         <Layout>
             <div className="space-y-6">
-                <div>
-                    <h1 className="text-2xl font-semibold text-gray-900">Settings</h1>
-                    <p className="mt-1 text-sm text-gray-600">
-                        Configure university resources and assets for carbon footprint tracking
-                    </p>
+                <div style={headerStyle}>
+                    <div style={headerOverlay}></div>
+                    <div style={headerContent} className="flex items-end justify-between">
+                        <div>
+                            <h1 className="text-4xl font-bold text-white">Settings</h1>
+                            <p className="mt-1 text-sm text-green-100">
+                                Configure university resources and assets for carbon footprint tracking
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 {successMessage && (

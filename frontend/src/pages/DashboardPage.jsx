@@ -26,6 +26,7 @@ import {
 import { useAuth } from '../context/AuthContext';
 import Layout from '../components/Layout';
 import { dataAPI } from '../services/api';
+import bgImage from '../assets/2e4f9049-0dc4-4feb-8d6e-771a9b778a9b.jpeg';
 
 ChartJS.register(
     CategoryScale,
@@ -184,218 +185,251 @@ const DashboardPage = () => {
         );
     }
 
+    const containerStyle = {
+        backgroundColor: '#f9fafb',
+    };
+
+    const headerStyle = {
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: '50% 68%',
+        backgroundAttachment: 'fixed',
+        position: 'relative',
+        margin: '-2rem -2rem 2rem -2rem',
+        padding: '5rem 3rem 3rem 2rem',
+        height: '160px',
+        borderRadius: '0',
+        overflow: 'hidden',
+    };
+
+    const headerOverlay = {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        zIndex: 0,
+    };
+
+    const headerContent = {
+        position: 'relative',
+        zIndex: 1,
+    };
+
     return (
         <Layout>
-            <div className="space-y-6">
-                {/* Header */}
-                <div className="bg-white rounded-lg shadow-sm border p-6">
-                    <div className="flex items-center justify-between">
+            <div style={containerStyle}>
+                <div style={headerStyle}>
+                    <div style={headerOverlay}></div>
+                    <div style={headerContent} className="flex items-end justify-between">
                         <div>
-                            <h1 className="text-3xl font-bold text-gray-900 flex items-center space-x-3">
-                                <Leaf className="h-8 w-8 text-primary-600" />
+                            <h1 className="text-4xl font-bold text-white flex items-center space-x-3">
+                                <Leaf className="h-10 w-10 text-green-400" />
                                 <span>Carbon Footprint Dashboard</span>
                             </h1>
-                            <p className="text-gray-600 mt-2">Track and monitor university carbon emissions</p>
+                            <p className="text-green-100 mt-2 ml-14">Track and monitor university carbon emissions</p>
                         </div>
                         <div className="text-right">
-                            <p className="text-sm text-gray-500">Today's Date</p>
-                            <p className="text-lg font-semibold">{new Date().toLocaleDateString()}</p>
+                            <p className="text-green-100">Today's Date</p>
+                            <p className="text-2xl font-semibold text-white">{new Date().toLocaleDateString()}</p>
                         </div>
                     </div>
                 </div>
+                <div className="space-y-6">
 
-                {/* View Toggle */}
-                <div className="flex justify-center">
-                    <div >
-                        <button
-                            onClick={() => setViewMode('daily')}
-                            className={`px-6 py-3 mx-0.5 rounded-xl transition-colors duration-70 ease-out font-medium border-none outline-none focus:ring-0 focus:outline-none ${viewMode === 'daily'
-                                ? 'bg-blue-600 text-white shadow-lg transform scale-105'
-                                : 'text-gray-600 hover:text-gray-900 hover:bg-white hover:shadow-sm'
-                                }`}
-                        >
-                            <Calendar className="h-4 w-4 inline mr-2" />
-                            <span>Today's Analysis</span>
-                        </button>
-                        <button
-                            onClick={() => setViewMode('weekly')}
-                            className={`px-6 py-3 mx-0.5 rounded-xl transition-colors duration-70 ease-out font-medium border-none outline-none focus:ring-0 focus:outline-none ${viewMode === 'weekly'
-                                ? 'bg-blue-600 text-white shadow-lg transform scale-105'
-                                : 'text-gray-600 hover:text-gray-900 hover:bg-white hover:shadow-sm'
-                                }`}
-                        >
-                            <BarChart className="h-4 w-4 inline mr-2" />
-                            <span>Weekly Trends</span>
-                        </button>
-                    </div>
-                </div>
-
-                {viewMode === 'daily' && todayData && (
-                    <>
-                        {/* Stats Cards */}
-                        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                            <div className="stat-card">
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <p className="text-primary-700 text-sm font-medium">Total Emissions</p>
-                                        <p className="text-3xl font-bold text-primary-900">{Number(todayData.totalEmissions).toFixed(2)}</p>
-                                        <p className="text-primary-600 text-sm">kg CO₂ today</p>
-                                    </div>
-                                    <Leaf className="h-8 w-8 text-primary-600" />
-                                </div>
-                            </div>
-
-                            <div className="card">
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <p className="text-gray-600 text-sm font-medium">Transport</p>
-                                        <p className="text-2xl font-bold text-red-600">{Number(todayData.breakdown.transport).toFixed(2)}</p>
-                                        <p className="text-gray-500 text-sm">kg CO₂</p>
-                                    </div>
-                                    <Car className="h-8 w-8 text-red-500" />
-                                </div>
-                            </div>
-
-                            <div className="card">
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <p className="text-gray-600 text-sm font-medium">Grid Energy</p>
-                                        <p className="text-2xl font-bold text-amber-600">{Number(todayData.breakdown.energy).toFixed(2)}</p>
-                                        <p className="text-gray-500 text-sm">kg CO₂</p>
-                                    </div>
-                                    <Zap className="h-8 w-8 text-amber-500" />
-                                </div>
-                            </div>
-
-                            <div className="card">
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <p className="text-gray-600 text-sm font-medium">Solar Savings</p>
-                                        <p className="text-2xl font-bold text-green-600">{Number(todayData.breakdown.solarSavings).toFixed(2)}</p>
-                                        <p className="text-gray-500 text-sm">kg CO₂</p>
-                                    </div>
-                                    <Sun className="h-8 w-8 text-green-500" />
-                                </div>
-                            </div>
+                    {/* View Toggle */}
+                    <div className="flex justify-center">
+                        <div >
+                            <button
+                                onClick={() => setViewMode('daily')}
+                                className={`px-6 py-3 mx-0.5 rounded-xl transition-colors duration-70 ease-out font-medium border-none outline-none focus:ring-0 focus:outline-none ${viewMode === 'daily'
+                                    ? 'bg-[#632b7d] text-white shadow-lg transform scale-105'
+                                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-200 hover:shadow-sm'
+                                    }`}
+                            >
+                                <Calendar className="h-4 w-4 inline mr-2" />
+                                <span>Today's Analysis</span>
+                            </button>
+                            <button
+                                onClick={() => setViewMode('weekly')}
+                                className={`px-6 py-3 mx-0.5 rounded-xl transition-colors duration-70 ease-out font-medium border-none outline-none focus:ring-0 focus:outline-none ${viewMode === 'weekly'
+                                    ? 'bg-[#632b7d] text-white shadow-lg transform scale-105'
+                                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-200 hover:shadow-sm'
+                                    }`}
+                            >
+                                <BarChart className="h-4 w-4 inline mr-2" />
+                                <span>Weekly Trends</span>
+                            </button>
                         </div>
+                    </div>
 
-                        {/* Charts */}
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            <div className="card">
-                                <h2 className="text-xl font-semibold text-gray-900 mb-4">Emissions Breakdown</h2>
-                                {pieChartData && (
-                                    <div className="h-80">
-                                        <Pie
-                                            data={pieChartData}
-                                            options={{
-                                                responsive: true,
-                                                maintainAspectRatio: false,
-                                                plugins: {
-                                                    legend: {
-                                                        position: 'right'
+                    {viewMode === 'daily' && todayData && (
+                        <>
+                            {/* Stats Cards */}
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                                <div className="stat-card">
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <p className="text-primary-700 text-sm font-medium">Total Emissions</p>
+                                            <p className="text-3xl font-bold text-primary-900">{Number(todayData.totalEmissions).toFixed(2)}</p>
+                                            <p className="text-primary-600 text-sm">kg CO₂ today</p>
+                                        </div>
+                                        <Leaf className="h-8 w-8 text-primary-600" />
+                                    </div>
+                                </div>
+
+                                <div className="card">
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <p className="text-gray-600 text-sm font-medium">Transport</p>
+                                            <p className="text-2xl font-bold text-red-600">{Number(todayData.breakdown.transport).toFixed(2)}</p>
+                                            <p className="text-gray-500 text-sm">kg CO₂</p>
+                                        </div>
+                                        <Car className="h-8 w-8 text-red-500" />
+                                    </div>
+                                </div>
+
+                                <div className="card">
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <p className="text-gray-600 text-sm font-medium">Grid Energy</p>
+                                            <p className="text-2xl font-bold text-amber-600">{Number(todayData.breakdown.energy).toFixed(2)}</p>
+                                            <p className="text-gray-500 text-sm">kg CO₂</p>
+                                        </div>
+                                        <Zap className="h-8 w-8 text-amber-500" />
+                                    </div>
+                                </div>
+
+                                <div className="card">
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <p className="text-gray-600 text-sm font-medium">Solar Savings</p>
+                                            <p className="text-2xl font-bold text-green-600">{Number(todayData.breakdown.solarSavings).toFixed(2)}</p>
+                                            <p className="text-gray-500 text-sm">kg CO₂</p>
+                                        </div>
+                                        <Sun className="h-8 w-8 text-green-500" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Charts */}
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                <div className="card">
+                                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Emissions Breakdown</h2>
+                                    {pieChartData && (
+                                        <div className="h-80">
+                                            <Pie
+                                                data={pieChartData}
+                                                options={{
+                                                    responsive: true,
+                                                    maintainAspectRatio: false,
+                                                    plugins: {
+                                                        legend: {
+                                                            position: 'right'
+                                                        }
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="card">
+                                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Target Progress</h2>
+                                    <div className="space-y-4">
+                                        <div>
+                                            <div className="flex justify-between text-sm text-gray-600 mb-1">
+                                                <span>Daily Target</span>
+                                                <span>{Number(todayData.totalEmissions).toFixed(2)} / {Number(todayData.targets.daily).toFixed(2)} kg</span>
+                                            </div>
+                                            <div className="w-full bg-gray-200 rounded-full h-3">
+                                                <div
+                                                    className={`h-3 rounded-full ${todayData.totalEmissions > todayData.targets.daily
+                                                        ? 'bg-red-500'
+                                                        : 'bg-green-500'
+                                                        }`}
+                                                    style={{
+                                                        width: `${Math.min((todayData.totalEmissions / todayData.targets.daily) * 100, 100)}%`
+                                                    }}
+                                                ></div>
+                                            </div>
+                                        </div>
+
+                                        <div className="pt-4 space-y-2">
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-gray-600">Transport</span>
+                                                <span className="text-red-600 font-medium">{Number(todayData.breakdown.transport).toFixed(2)} kg</span>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-gray-600">Energy</span>
+                                                <span className="text-amber-600 font-medium">{Number(todayData.breakdown.energy).toFixed(2)} kg</span>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-gray-600">Paper</span>
+                                                <span className="text-lime-600 font-medium">{Number(todayData.breakdown.paper).toFixed(2)} kg</span>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-gray-600">Generator</span>
+                                                <span className="text-gray-600 font-medium">{Number(todayData.breakdown.generator).toFixed(2)} kg</span>
+                                            </div>
+                                            <div className="flex items-center justify-between border-t pt-2">
+                                                <span className="text-gray-600">Solar Offset</span>
+                                                <span className="text-green-600 font-medium">{Number(todayData.breakdown.solarSavings).toFixed(2)} kg</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+                    )}
+
+                    {viewMode === 'weekly' && weeklyData && (
+                        <div className="card">
+                            <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center space-x-2">
+                                <TrendingUp className="h-5 w-5" />
+                                <span>Weekly Emission Trends</span>
+                            </h2>
+                            {lineChartData && (
+                                <div className="h-80">
+                                    <Line
+                                        data={lineChartData}
+                                        options={{
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            scales: {
+                                                y: {
+                                                    beginAtZero: true,
+                                                    title: {
+                                                        display: true,
+                                                        text: 'CO₂ Emissions (kg)'
                                                     }
                                                 }
-                                            }}
-                                        />
-                                    </div>
-                                )}
-                            </div>
+                                            }
+                                        }}
+                                    />
+                                </div>
+                            )}
 
-                            <div className="card">
-                                <h2 className="text-xl font-semibold text-gray-900 mb-4">Target Progress</h2>
-                                <div className="space-y-4">
-                                    <div>
-                                        <div className="flex justify-between text-sm text-gray-600 mb-1">
-                                            <span>Daily Target</span>
-                                            <span>{Number(todayData.totalEmissions).toFixed(2)} / {Number(todayData.targets.daily).toFixed(2)} kg</span>
-                                        </div>
-                                        <div className="w-full bg-gray-200 rounded-full h-3">
-                                            <div
-                                                className={`h-3 rounded-full ${todayData.totalEmissions > todayData.targets.daily
-                                                    ? 'bg-red-500'
-                                                    : 'bg-green-500'
-                                                    }`}
-                                                style={{
-                                                    width: `${Math.min((todayData.totalEmissions / todayData.targets.daily) * 100, 100)}%`
-                                                }}
-                                            ></div>
-                                        </div>
-                                    </div>
-
-                                    <div className="pt-4 space-y-2">
-                                        <div className="flex items-center justify-between">
-                                            <span className="text-gray-600">Transport</span>
-                                            <span className="text-red-600 font-medium">{Number(todayData.breakdown.transport).toFixed(2)} kg</span>
-                                        </div>
-                                        <div className="flex items-center justify-between">
-                                            <span className="text-gray-600">Energy</span>
-                                            <span className="text-amber-600 font-medium">{Number(todayData.breakdown.energy).toFixed(2)} kg</span>
-                                        </div>
-                                        <div className="flex items-center justify-between">
-                                            <span className="text-gray-600">Paper</span>
-                                            <span className="text-lime-600 font-medium">{Number(todayData.breakdown.paper).toFixed(2)} kg</span>
-                                        </div>
-                                        <div className="flex items-center justify-between">
-                                            <span className="text-gray-600">Generator</span>
-                                            <span className="text-gray-600 font-medium">{Number(todayData.breakdown.generator).toFixed(2)} kg</span>
-                                        </div>
-                                        <div className="flex items-center justify-between border-t pt-2">
-                                            <span className="text-gray-600">Solar Offset</span>
-                                            <span className="text-green-600 font-medium">{Number(todayData.breakdown.solarSavings).toFixed(2)} kg</span>
-                                        </div>
-                                    </div>
+                            <div className="mt-6 grid grid-cols-3 gap-4 pt-4 border-t">
+                                <div className="text-center">
+                                    <p className="text-2xl font-bold text-gray-900">{Number(weeklyData.emissions.reduce((a, b) => a + b, 0)).toFixed(2)}</p>
+                                    <p className="text-gray-600 text-sm">Total This Week</p>
+                                </div>
+                                <div className="text-center">
+                                    <p className="text-2xl font-bold text-gray-900">{Number(weeklyData.emissions.reduce((a, b) => a + b, 0) / 7).toFixed(2)}</p>
+                                    <p className="text-gray-600 text-sm">Daily Average</p>
+                                </div>
+                                <div className="text-center">
+                                    <p className="text-2xl font-bold text-green-600">-12.3%</p>
+                                    <p className="text-gray-600 text-sm">vs Last Week</p>
                                 </div>
                             </div>
                         </div>
-                    </>
-                )}
+                    )}
 
-                {viewMode === 'weekly' && weeklyData && (
-                    <div className="card">
-                        <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center space-x-2">
-                            <TrendingUp className="h-5 w-5" />
-                            <span>Weekly Emission Trends</span>
-                        </h2>
-                        {lineChartData && (
-                            <div className="h-80">
-                                <Line
-                                    data={lineChartData}
-                                    options={{
-                                        responsive: true,
-                                        maintainAspectRatio: false,
-                                        scales: {
-                                            y: {
-                                                beginAtZero: true,
-                                                title: {
-                                                    display: true,
-                                                    text: 'CO₂ Emissions (kg)'
-                                                }
-                                            }
-                                        }
-                                    }}
-                                />
-                            </div>
-                        )}
-
-                        <div className="mt-6 grid grid-cols-3 gap-4 pt-4 border-t">
-                            <div className="text-center">
-                                <p className="text-2xl font-bold text-gray-900">{Number(weeklyData.emissions.reduce((a, b) => a + b, 0)).toFixed(2)}</p>
-                                <p className="text-gray-600 text-sm">Total This Week</p>
-                            </div>
-                            <div className="text-center">
-                                <p className="text-2xl font-bold text-gray-900">{Number(weeklyData.emissions.reduce((a, b) => a + b, 0) / 7).toFixed(2)}</p>
-                                <p className="text-gray-600 text-sm">Daily Average</p>
-                            </div>
-                            <div className="text-center">
-                                <p className="text-2xl font-bold text-green-600">-12.3%</p>
-                                <p className="text-gray-600 text-sm">vs Last Week</p>
-                            </div>
-                        </div>
-                    </div>
-                )}
-
-                {/* Quick Actions */}
-                {/* {user?.role === 'admin' && (
+                    {/* Quick Actions */}
+                    {/* {user?.role === 'admin' && (
                     <div className="card">
                         <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -416,6 +450,7 @@ const DashboardPage = () => {
                         </div>
                     </div>
                 )}*/}
+                </div>
             </div>
         </Layout>
     );

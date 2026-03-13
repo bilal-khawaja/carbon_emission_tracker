@@ -11,7 +11,7 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
+    @apply bg-[#632b7d] hover:bg-[#522368] text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
   }
 
   .btn-secondary {
@@ -23,12 +23,16 @@
   }
 
   .input-field {
-    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors;
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#632b7d] focus:border-[#632b7d] transition-colors;
   }
 
   .stat-card {
-    @apply bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-xl p-6;
-  }
+    @apply bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200 rounded-xl p-6;  }
+
+  .decorative-quote {
+  font-family: 'Arial Black', sans-serif;
+  @apply absolute text-8xl text-purple-900 opacity-10 select-none;
+}
 }
 
 button:focus,

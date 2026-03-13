@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import Layout from '../components/Layout';
 import { Car, Zap, FileText, Settings, Plus, Filter, Save } from 'lucide-react';
 import { settingsAPI } from '../services/api';
-
+import bgImage from '../assets/5f6cb232-d38f-4a43-b197-eaeb0ff2ef08.jpeg';
 const DataEntryPage = () => {
     const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -82,15 +82,48 @@ const DataEntryPage = () => {
         }
     };
 
+    const headerStyle = {
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: '50% 94%',
+        backgroundAttachment: 'fixed',
+        position: 'relative',
+        margin: '-2rem -2rem 2rem -2rem',
+        padding: '5rem 3rem 3rem 2rem',
+        height: '160px',
+        borderRadius: '0',
+        overflow: 'hidden',
+    };
+
+    const headerOverlay = {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        zIndex: 0,
+    };
+
+    const headerContent = {
+        position: 'relative',
+        zIndex: 1,
+    };
     return (
         <Layout>
             <div className="space-y-6">
+                <div style={headerStyle}>
+                    <div style={headerOverlay}></div>
+                    <div style={headerContent} className="flex items-end justify-between">
+                        <div>
+                            <h1 className="text-4xl font-bold text-white flex items-center space-x-3">Daily Data Entry</h1>
+                            <p className="text-green-100">Record your daily carbon footprint activities</p>
+                        </div>
+                    </div>
+                </div>
                 <div className="bg-white rounded-lg shadow p-6">
                     <div className="flex items-center justify-between mb-6">
-                        <div>
-                            <h1 className="text-2xl font-bold text-gray-900">Daily Data Entry</h1>
-                            <p className="text-gray-600">Record your daily carbon footprint activities</p>
-                        </div>
+
                         <div className="flex items-center space-x-2 text-gray-500">
                             <Filter size={20} />
                             <input
