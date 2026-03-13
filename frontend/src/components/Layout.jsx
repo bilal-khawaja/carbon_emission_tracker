@@ -117,7 +117,7 @@ const Layout = ({ children }) => {
                             <NavItems mobile />
                         </nav>
                     </div>
-                    <div className="border-t border-gray-200 p-4">
+                    <div className="border-t border-gray-200 p-4 pb-8">
                         {isAuthenticated ? (
                             <div className="flex items-center justify-between">
                                 <div>
@@ -138,7 +138,7 @@ const Layout = ({ children }) => {
                                 className="w-full btn-primary flex items-center justify-center space-x-2"
                             >
                                 <LogIn className="h-4 w-4" />
-                                <span>Admin Login</span>
+                                <span>Login</span>
                             </button>
                         )}
                     </div>
@@ -159,7 +159,7 @@ const Layout = ({ children }) => {
                                     <NavItems />
                                 </ul>
                             </li>
-                            <li className="mt-auto border-t border-gray-200 pt-6">
+                            <li className="mt-auto border-t border-gray-200 pt-6 pb-6">
                                 {isAuthenticated ? (
                                     <div className="flex items-center justify-between">
                                         <div>
@@ -180,7 +180,7 @@ const Layout = ({ children }) => {
                                         className="w-full btn-primary flex items-center justify-center space-x-2"
                                     >
                                         <LogIn className="h-4 w-4" />
-                                        <span>Admin Login</span>
+                                        <span>Login</span>
                                     </button>
                                 )}
                             </li>
