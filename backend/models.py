@@ -7,7 +7,7 @@ class Users(SQLModel, table=True):
     id: int = Field(default=None, primary_key=True)
     created_date: date = Field(default_factory=date.today, nullable=False)
     name: str = Field(default=None, nullable=False)
-    role: str = Field(default="admin", nullable=False)
+    role: str = Field(default="user", nullable=False)
     email: str = Field(default=None, nullable=False, unique=True)
     password: str = Field(default=None, nullable=False)
 
