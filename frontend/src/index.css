@@ -4,7 +4,7 @@
 /* Carbon Footprint Tracker Custom Styles */
 @layer base {
   body {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Montserrat', system-ui, sans-serif;
     @apply bg-gray-50 text-gray-900;
   }
 }
@@ -30,7 +30,7 @@
     @apply bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200 rounded-xl p-6;  }
 
   .decorative-quote {
-  font-family: 'Arial Black', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   @apply absolute text-8xl text-purple-900 opacity-10 select-none;
 }
 }

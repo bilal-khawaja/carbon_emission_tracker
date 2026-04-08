@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider } from './context/AuthContext';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import CoverPage from './components/CoverPage';
 import DashboardPage from './pages/DashboardPage';
 import SettingsPage from './pages/SettingsPage';
 import DailyEntryPage from './pages/DataEntryPage';
@@ -20,6 +21,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/" element={<CoverPage />} />
             <Route path="/reports" element={<ReportsPage />} />
             <Route path="/about" element={<AboutPage />} />
 
@@ -35,9 +37,6 @@ function App() {
                 <DailyEntryPage />
               </ProtectedRoute>
             } />
-
-            {/* Redirect root to dashboard */}
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
             {/* Catch all redirect */}
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
