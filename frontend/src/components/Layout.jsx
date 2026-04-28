@@ -101,7 +101,7 @@ const Layout = ({ children }) => {
                 <div className="relative flex w-full max-w-xs flex-col bg-white shadow-xl">
                     <div className="flex h-16 flex-shrink-0 items-center justify-between px-4">
                         <div className="flex items-center space-x-3">
-                            <img src={logoImage} alt="SUPERIOR UNIVERSITY" className="h-12 w-12 rounded-full object-cover" />
+                            <img src={logoImage} alt="SUPERIOR UNIVERSITY" className="h-16 w-16 rounded-full object-cover" />
                             <span className="text-lg font-semibold text-gray-900" style={{ fontFamily: 'Times New Roman, serif' }}>SUPERIOR UNIVERSITY</span>
                         </div>
                         <button
