@@ -10,7 +10,7 @@ app = APIRouter()
 
 @app.put("/university_resources")
 def set_resources(data: BulkAssetRequest, 
-        current_user: Users = Depends(get_current_user("admin")),
+    current_user: Users = Depends(get_current_user()),
              session: Session = Depends(get_session)):
     
     print(f"Authenticated user: {current_user.email}")  # Debug log
@@ -39,7 +39,7 @@ def set_resources(data: BulkAssetRequest,
 
 @app.put("/daily_consumption")
 def set_daily_consumption(data: DailyConsumptionInput,
-                         current_user: Users = Depends(get_current_user("admin")),
+                        current_user: Users = Depends(get_current_user()),
                          session: Session = Depends(get_session)):
     
     factors = session.exec(select(EmissionFactor)).all()

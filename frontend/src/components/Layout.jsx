@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useState } from 'react';
-import logoImage from '../assets/images.jpg';
+import logoImage from '../assets/carbon_tracker__1_-removebg-preview.png';
 
 const Layout = ({ children }) => {
     const { logout, user, isAuthenticated } = useAuth();

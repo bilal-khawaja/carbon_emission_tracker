@@ -38,7 +38,8 @@ class LiveTrackerResponse(BaseModel):
 @router.get("/daily_consumption", response_model=LiveTrackerResponse)
 def get_live_tracker(
     consumption_date: Optional[date] = Query(None, description="Date for live emissions calculation"),
-    session: Session = Depends(get_session)
+    session: Session = Depends(get_session),
+    current_user: Users = Depends(get_current_user())
 ):
     record = session.exec(select(EmissionRecord).where(
         EmissionRecord.record_date == (consumption_date or date.today()))).first()
@@ -65,7 +66,8 @@ def get_live_tracker(
 
 
 @router.get("/dashboard_summary", response_model=DashboardSummary)
-def get_dashboard_summary(session: Session = Depends(get_session)):
+def get_dashboard_summary(session: Session = Depends(get_session),
+                        current_user: Users = Depends(get_current_user())):
 
     today = date.today()
     today_record = session.exec(
@@ -148,7 +150,8 @@ def get_dashboard_summary(session: Session = Depends(get_session)):
 
 @router.get("/university_assets", response_model=List[UniversityAssetResponse])
 def get_university_assets(session: Session = Depends(get_session),
- get_current_user: Users = Depends(get_current_user("admin"))):
+                        current_user: Users = Depends(get_current_user()),
+):
 
     print("Getting university assets from database...") 
     assets = session.exec(select(UniversityAssets)).all()
@@ -162,7 +165,9 @@ def get_reports(
     report_type: str = Query("weekly", description="Type of report: weekly, monthly, yearly"),
     start_date: Optional[date] = Query(None),
     end_date: Optional[date] = Query(None),
-    session: Session = Depends(get_session)
+    session: Session = Depends(get_session),
+    current_user: Users = Depends(get_current_user()),
+
 ):
     today = date.today()
     
