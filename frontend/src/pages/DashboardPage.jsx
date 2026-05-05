@@ -174,11 +174,9 @@ const DashboardPage = () => {
                         <Calendar className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                         <h3 className="text-lg font-medium text-gray-900 mb-2">No Data Available</h3>
                         <p className="text-gray-600 mb-4">No emissions data has been recorded yet.</p>
-                        {user?.role === 'admin' && (
-                            <a href="/daily-entry" className="btn-primary">
-                                Enter Today's Data
-                            </a>
-                        )}
+                        <a href="/daily-entry" className="btn-primary">
+                            Enter Today's Data
+                        </a>
                     </div>
                 </div>
             </Layout>

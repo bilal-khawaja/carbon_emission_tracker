@@ -35,13 +35,9 @@ const Layout = ({ children }) => {
         { name: 'Dashboard', href: '/dashboard', icon: Home, current: location.pathname === '/dashboard' },
         { name: 'Reports', href: '/reports', icon: BarChart3, current: location.pathname === '/reports' },
         { name: 'Campaign', href: '/campaign', icon: Flame, current: location.pathname === '/campaign' },
-        { name: 'About', href: '/about', icon: Info, current: location.pathname === '/about' },
-    ];
-
-    // Admin-only navigation
-    const adminNavigation = [
         { name: 'Settings', href: '/settings', icon: Settings, current: location.pathname === '/settings' },
         { name: 'Daily Entry', href: '/daily-entry', icon: Calendar, current: location.pathname === '/daily-entry' },
+        { name: 'About', href: '/about', icon: Info, current: location.pathname === '/about' },
     ];
 
     const NavItems = ({ mobile = false }) => (
@@ -64,34 +60,6 @@ const Layout = ({ children }) => {
                     {item.name}
                 </Link>
             ))}
-
-            {isAuthenticated && user?.role === 'admin' && (
-                <>
-                    <div className="mt-6 mb-2">
-                        <h3 className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                            Admin
-                        </h3>
-                    </div>
-                    {adminNavigation.map((item) => (
-                        <Link
-                            key={item.name}
-                            to={item.href}
-                            className={`${item.current
-                                ? 'bg-[#632b7d] text-white'
-                                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                                } group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${mobile ? 'w-full' : ''
-                                }`}
-                            onClick={() => mobile && setSidebarOpen(false)}
-                        >
-                            <item.icon
-                                className={`${item.current ? 'text-white' : 'text-gray-400 group-hover:text-gray-500'
-                                    } mr-3 h-5 w-5 flex-shrink-0`}
-                            />
-                            {item.name}
-                        </Link>
-                    ))}
-                </>
-            )}
         </>
     );
 

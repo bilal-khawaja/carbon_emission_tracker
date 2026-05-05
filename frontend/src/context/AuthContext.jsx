@@ -1,6 +1,21 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { authAPI } from '../services/api';
 
+// Helper function to decode JWT token
+const decodeJWT = (token) => {
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload);
+    } catch (error) {
+        console.error('Error decoding JWT:', error);
+        return null;
+    }
+};
+
 // Initial state
 const initialState = {
     user: null,
@@ -123,11 +138,12 @@ export const AuthProvider = ({ children }) => {
             if (response.access_token) {
                 localStorage.setItem('access_token', response.access_token);
 
-                // Create user object - you might want to add user info to the signin response
+                // Decode JWT to get user info including role from backend
+                const decodedToken = decodeJWT(response.access_token);
                 const user = {
-                    email,
-                    name: email.split('@')[0], // Extract name from email for now
-                    role: 'admin' // Backend should provide this
+                    email: decodedToken?.sub || email,
+                    name: decodedToken?.sub?.split('@')[0] || email.split('@')[0],
+                    role: decodedToken?.role || 'user'
                 };
                 localStorage.setItem('user', JSON.stringify(user));
 

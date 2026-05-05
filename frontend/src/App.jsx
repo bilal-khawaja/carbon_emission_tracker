@@ -10,7 +10,6 @@ import DailyEntryPage from './pages/DataEntryPage';
 import ReportsPage from './pages/ReportsPage';
 import AboutPage from './pages/AboutPage';
 import CampaignPage from './pages/CampaignPage';
-import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -27,18 +26,9 @@ function App() {
             <Route path="/campaign" element={<CampaignPage />} />
             <Route path="/about" element={<AboutPage />} />
 
-            {/* Admin-Only Protected Routes */}
-            <Route path="/settings" element={
-              <ProtectedRoute adminOnly={true}>
-                <SettingsPage />
-              </ProtectedRoute>
-            } />
-
-            <Route path="/daily-entry" element={
-              <ProtectedRoute adminOnly={true}>
-                <DailyEntryPage />
-              </ProtectedRoute>
-            } />
+            {/* All Routes - No Protected Routes */}
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/daily-entry" element={<DailyEntryPage />} />
 
             {/* Catch all redirect */}
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
