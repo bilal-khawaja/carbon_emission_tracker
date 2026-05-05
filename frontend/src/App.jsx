@@ -9,6 +9,7 @@ import SettingsPage from './pages/SettingsPage';
 import DailyEntryPage from './pages/DataEntryPage';
 import ReportsPage from './pages/ReportsPage';
 import AboutPage from './pages/AboutPage';
+import CampaignPage from './pages/CampaignPage';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/" element={<CoverPage />} />
             <Route path="/reports" element={<ReportsPage />} />
+            <Route path="/campaign" element={<CampaignPage />} />
             <Route path="/about" element={<AboutPage />} />
 
             {/* Admin-Only Protected Routes */}

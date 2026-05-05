@@ -9,7 +9,8 @@ import {
     LogOut,
     LogIn,
     Menu,
-    X
+    X,
+    Flame
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useState } from 'react';
@@ -33,6 +34,7 @@ const Layout = ({ children }) => {
     const navigation = [
         { name: 'Dashboard', href: '/dashboard', icon: Home, current: location.pathname === '/dashboard' },
         { name: 'Reports', href: '/reports', icon: BarChart3, current: location.pathname === '/reports' },
+        { name: 'Campaign', href: '/campaign', icon: Flame, current: location.pathname === '/campaign' },
         { name: 'About', href: '/about', icon: Info, current: location.pathname === '/about' },
     ];
 
